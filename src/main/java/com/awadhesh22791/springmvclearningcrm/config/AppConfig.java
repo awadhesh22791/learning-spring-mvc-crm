@@ -11,7 +11,7 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 @Configuration
 @EnableWebMvc
-@ComponentScan(basePackages = "com.awadhesh22791.springmvclearning")
+@ComponentScan(basePackages = "com.awadhesh22791.springmvclearningcrm")
 public class AppConfig {
 
 	@Bean
