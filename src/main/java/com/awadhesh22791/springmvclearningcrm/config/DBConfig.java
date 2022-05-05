@@ -1,4 +1,5 @@
 package com.awadhesh22791.springmvclearningcrm.config;
+
 import java.io.IOException;
 import java.util.Properties;
 import javax.sql.DataSource;
@@ -14,16 +15,19 @@ import org.springframework.orm.hibernate5.HibernateTemplate;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
-@Configuration 
+
+@Configuration
 @EnableTransactionManagement
 @PropertySource("classpath:application.properties")
 public class DBConfig {
-        @Autowired
-        private Environment env;
+	@Autowired
+	private Environment env;
+
 	@Bean
 	public HibernateTemplate hibernateTemplate() {
 		return new HibernateTemplate(sessionFactory());
 	}
+
 	@Bean
 	public SessionFactory sessionFactory() {
 		LocalSessionFactoryBean lsfb = new LocalSessionFactoryBean();
@@ -37,24 +41,27 @@ public class DBConfig {
 		}
 		return lsfb.getObject();
 	}
+
 	@Bean
 	public DataSource getDataSource() {
-	    BasicDataSource dataSource = new BasicDataSource();
-	    dataSource.setDriverClassName(env.getProperty("database.driver"));
-	    dataSource.setUrl(env.getProperty("database.url"));
-	    dataSource.setUsername(env.getProperty("database.root"));
-	    dataSource.setPassword(env.getProperty("database.password"));
-	    return dataSource;
+		BasicDataSource dataSource = new BasicDataSource();
+		dataSource.setDriverClassName(env.getProperty("database.driver"));
+		dataSource.setUrl(env.getProperty("database.url"));
+		dataSource.setUsername(env.getProperty("database.root"));
+		dataSource.setPassword(env.getProperty("database.password"));
+		return dataSource;
 	}
+
 	@Bean
-	public HibernateTransactionManager hibTransMan(){
+	public HibernateTransactionManager hibTransMan() {
 		return new HibernateTransactionManager(sessionFactory());
 	}
-        private Properties hibernateProperties() {
-            Properties properties = new Properties();
-            properties.put("hibernate.dialect", env.getProperty("hibernate.dialect"));
-            properties.put("hibernate.hbm2ddl.auto", env.getProperty("hibernate.hbm2ddl.auto"));
-            properties.put("hibernate.show_sql", env.getProperty("hibernate.show_sql"));
-            return properties;        
-       }	
-} 
+
+	private Properties hibernateProperties() {
+		Properties properties = new Properties();
+		properties.put("hibernate.dialect", env.getProperty("hibernate.dialect"));
+		properties.put("hibernate.hbm2ddl.auto", env.getProperty("hibernate.hbm2ddl.auto"));
+		properties.put("hibernate.show_sql", env.getProperty("hibernate.show_sql"));
+		return properties;
+	}
+}

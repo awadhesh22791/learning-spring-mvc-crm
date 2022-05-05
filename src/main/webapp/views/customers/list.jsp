@@ -6,6 +6,9 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Customers</title>
+<link type="text/css" rel="stylesheet"
+	href="${pageContext.request.contextPath }/resources/css/style.css">
+	
 </head>
 <body>
 	<div id="wrapper">
@@ -13,6 +16,11 @@
 			<h2>CRM - Customer Relationship Manager</h2>
 		</div>
 	</div>
+	<div>
+		<button type="button" onclick="window.location.href='new';return false;"
+			class="add-button">Add Customer</button>
+	</div>
+	
 	<div id="container">
 		<c:if test="${customers.size() gt 0}">
 			<table>
@@ -20,12 +28,14 @@
 					<th>First Name</th>
 					<th>Last Name</th>
 					<th>Email</th>
+					<th>Action</th>
 				</tr>
 				<c:forEach var="customer" items="${customers }">
 					<tr>
 						<td>${customer.firstName }</td>
 						<td>${customer.lastName }</td>
 						<td>${customer.email }</td>
+						<td><a href="edit?id=${customer.id}">Edit</a></td>
 					</tr>
 				</c:forEach>
 			</table>

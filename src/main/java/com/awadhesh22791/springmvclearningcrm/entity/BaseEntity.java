@@ -11,7 +11,10 @@ import javax.persistence.MappedSuperclass;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import lombok.Data;
+
 @MappedSuperclass
+@Data
 public class BaseEntity {
 	
 	@Id

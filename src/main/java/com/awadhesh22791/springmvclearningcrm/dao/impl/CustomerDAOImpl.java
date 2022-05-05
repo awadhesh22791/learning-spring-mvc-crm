@@ -7,8 +7,6 @@ import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
-
 import com.awadhesh22791.springmvclearningcrm.dao.CustomerDAO;
 import com.awadhesh22791.springmvclearningcrm.entity.Customer;
 
@@ -19,11 +17,26 @@ public class CustomerDAOImpl implements CustomerDAO {
 	private SessionFactory sessionFactory;
 	
 	@Override
-	@Transactional
 	public List<Customer> getCustomers() {
 		Session currentSession = sessionFactory.getCurrentSession();
-		Query<Customer> getQuery = currentSession.createQuery("from Customer", Customer.class);
+		Query<Customer> getQuery = currentSession.createQuery("from Customer order by firstName,lastName,email", Customer.class);
 		return getQuery.getResultList();
+	}
+
+	@Override
+	public void save(Customer customer) {
+		Session session = sessionFactory.getCurrentSession();
+		session.save(customer);
+	}
+
+	@Override
+	public Customer get(Integer id) {
+		return sessionFactory.getCurrentSession().get(Customer.class, id);
+	}
+
+	@Override
+	public void update(Customer customer) {
+		sessionFactory.getCurrentSession().saveOrUpdate(customer);
 	}
 
 }
