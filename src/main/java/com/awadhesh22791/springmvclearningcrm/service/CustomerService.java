@@ -12,4 +12,6 @@ public interface CustomerService {
 	public Customer get(Integer id);
 
 	public void update(Customer customer);
+
+	public void delete(Integer id);
 }

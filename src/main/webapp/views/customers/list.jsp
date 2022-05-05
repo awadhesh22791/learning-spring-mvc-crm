@@ -35,7 +35,7 @@
 						<td>${customer.firstName }</td>
 						<td>${customer.lastName }</td>
 						<td>${customer.email }</td>
-						<td><a href="edit?id=${customer.id}">Edit</a></td>
+						<td><a href="edit?id=${customer.id}">Edit</a> | <a href="delete?id=${customer.id }">Delete</a></td>
 					</tr>
 				</c:forEach>
 			</table>

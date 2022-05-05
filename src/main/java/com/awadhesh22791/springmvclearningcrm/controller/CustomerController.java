@@ -69,4 +69,10 @@ public class CustomerController {
 			return "redirect:"+"list";
 		}
 	}
+	
+	@GetMapping("delete")
+	public String delete(@RequestParam("id")Integer id) {
+		customerService.delete(id);
+		return "redirect:"+"list";
+	}
 }
