@@ -1,6 +1,7 @@
 package com.awadhesh22791.springmvclearningcrm.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.validation.Valid;
 
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.awadhesh22791.springmvclearningcrm.dto.CustomerListSorting;
 import com.awadhesh22791.springmvclearningcrm.entity.Customer;
 import com.awadhesh22791.springmvclearningcrm.service.CustomerService;
 
@@ -31,8 +33,13 @@ public class CustomerController {
 	private CustomerService customerService;
 
 	@GetMapping("list")
-	public String customers(Model model,@RequestParam(name = "name",required = false)String name) {
-		List<Customer> customers = customerService.getAllCustomers(name);
+	public String customers(Model model,@RequestParam(name = "name",required = false)String name,
+			@RequestParam(name = "sortByFirstName",required=false)Boolean firstName,
+			@RequestParam(name = "sortByLastName",required=false)Boolean lastName,
+			@RequestParam(name = "sortByEmail",required=false)Boolean email) {
+		CustomerListSorting sorting=new CustomerListSorting(Optional.ofNullable(firstName).orElse(false), Optional.ofNullable(lastName).orElse(false),
+				Optional.ofNullable(email).orElse(false));
+		List<Customer> customers = customerService.getAllCustomers(name, sorting);
 		log.info("Found {} customers.", customers.size());
 		model.addAttribute("customers", customers);
 		return CUSTOMERS_FOLDER + "list";

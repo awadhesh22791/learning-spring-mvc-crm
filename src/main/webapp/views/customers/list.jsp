@@ -25,6 +25,9 @@
 	<div>
 		<!--  add a search box -->
         <form:form action="" method="GET">
+        	<input type="hidden" name="sortByFirstName" value="${param.sortByFirstName }">
+        	<input type="hidden" name="sortByLastName" value="${param.sortByLastName }">
+        	<input type="hidden" name="sortByEmail" value="${param.sortByEmail }">
             Search customer: <input type="text" name="name" value="${param.name }" />
             
             <input type="submit" value="Search" class="add-button" />
@@ -32,12 +35,30 @@
 	</div>
 	
 	<div id="container">
+		<c:url var="firstNameSort" value="">
+			<c:param name="name" value="${param.name }"/>
+			<c:param name="sortByFirstName" value="${not param.sortByFirstName }"></c:param>
+			<c:param name="sortByLastName" value="${param.sortByLastName }"></c:param>
+			<c:param name="sortByEmail" value="${param.sortByEmail }"></c:param>
+		</c:url>
+		<c:url var="lastNameSort" value="">
+			<c:param name="name" value="${param.name }"/>
+			<c:param name="sortByFirstName" value="${param.sortByFirstName }"></c:param>
+			<c:param name="sortByLastName" value="${not param.sortByLastName }"></c:param>
+			<c:param name="sortByEmail" value="${param.sortByEmail }"></c:param>
+		</c:url>
+		<c:url var="emailSort" value="">
+			<c:param name="name" value="${param.name }"/>
+			<c:param name="sortByFirstName" value="${param.sortByFirstName }"></c:param>
+			<c:param name="sortByLastName" value="${param.sortByLastName }"></c:param>
+			<c:param name="sortByEmail" value="${not param.sortByEmail }"></c:param>
+		</c:url>
 		<c:if test="${customers.size() gt 0}">
 			<table>
 				<tr>
-					<th>First Name</th>
-					<th>Last Name</th>
-					<th>Email</th>
+					<th><a href="${firstNameSort }">First Name</a></th>
+					<th><a href="${lastNameSort }">Last Name</a></th>
+					<th><a href="${emailSort }">Email</a></th>
 					<th>Action</th>
 				</tr>
 				<c:forEach var="customer" items="${customers }">

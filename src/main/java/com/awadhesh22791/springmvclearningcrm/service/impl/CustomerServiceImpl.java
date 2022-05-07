@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.awadhesh22791.springmvclearningcrm.dao.CustomerDAO;
+import com.awadhesh22791.springmvclearningcrm.dto.CustomerListSorting;
 import com.awadhesh22791.springmvclearningcrm.entity.Customer;
 import com.awadhesh22791.springmvclearningcrm.service.CustomerService;
 
@@ -21,8 +22,8 @@ public class CustomerServiceImpl implements CustomerService {
 	
 	@Override
 	@Transactional
-	public List<Customer> getAllCustomers(String name) {
-		return customerDao.getCustomers(name);
+	public List<Customer> getAllCustomers(String name, CustomerListSorting sorting) {
+		return customerDao.getCustomers(name, sorting);
 	}
 
 	@Override

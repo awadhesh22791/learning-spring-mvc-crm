@@ -2,10 +2,11 @@ package com.awadhesh22791.springmvclearningcrm.dao;
 
 import java.util.List;
 
+import com.awadhesh22791.springmvclearningcrm.dto.CustomerListSorting;
 import com.awadhesh22791.springmvclearningcrm.entity.Customer;
 
 public interface CustomerDAO {
-	public List<Customer> getCustomers(String name);
+	public List<Customer> getCustomers(String name, CustomerListSorting sorting);
 
 	public void save(Customer customer);
 
