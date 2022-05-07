@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,6 +22,15 @@
 			class="add-button">Add Customer</button>
 	</div>
 	
+	<div>
+		<!--  add a search box -->
+        <form:form action="" method="GET">
+            Search customer: <input type="text" name="name" value="${param.name }" />
+            
+            <input type="submit" value="Search" class="add-button" />
+        </form:form>
+	</div>
+	
 	<div id="container">
 		<c:if test="${customers.size() gt 0}">
 			<table>
@@ -35,7 +45,7 @@
 						<td>${customer.firstName }</td>
 						<td>${customer.lastName }</td>
 						<td>${customer.email }</td>
-						<td><a href="edit?id=${customer.id}">Edit</a> | <a href="delete?id=${customer.id }">Delete</a></td>
+						<td><a href="edit?id=${customer.id}">Edit</a> | <a onclick="return confirm('Want to delete ${customer.firstName} ?')" href="delete?id=${customer.id }">Delete</a></td>
 					</tr>
 				</c:forEach>
 			</table>

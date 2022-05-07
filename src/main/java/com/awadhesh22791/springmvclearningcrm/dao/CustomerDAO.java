@@ -5,7 +5,7 @@ import java.util.List;
 import com.awadhesh22791.springmvclearningcrm.entity.Customer;
 
 public interface CustomerDAO {
-	public List<Customer> getCustomers();
+	public List<Customer> getCustomers(String name);
 
 	public void save(Customer customer);
 

@@ -13,6 +13,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.Formula;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import lombok.Data;
@@ -40,6 +41,9 @@ public class Customer implements Serializable{
 	@Size(min = 4,max = 45,message = "Mandatory field.")
 	@Column(name = "email",nullable = false)
 	private String email;
+	
+	@Formula("concat(first_name, ' ',last_name)")
+	private String fullName;
 	
 
 	

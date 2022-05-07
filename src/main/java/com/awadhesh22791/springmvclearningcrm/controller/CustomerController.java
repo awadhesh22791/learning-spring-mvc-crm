@@ -31,8 +31,8 @@ public class CustomerController {
 	private CustomerService customerService;
 
 	@GetMapping("list")
-	public String customers(Model model) {
-		List<Customer> customers = customerService.getAllCustomers();
+	public String customers(Model model,@RequestParam(name = "name",required = false)String name) {
+		List<Customer> customers = customerService.getAllCustomers(name);
 		log.info("Found {} customers.", customers.size());
 		model.addAttribute("customers", customers);
 		return CUSTOMERS_FOLDER + "list";
